@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de Consumo da Pulseira</title>
+</head>
+
+<body>
+
+Capacidade da bateria (mAh):
+<input type="text" id="input_bateria"><br><br>
+
+Consumo da pulseira (mA):
+<input type="text" id="input_consumo"><br><br>
+
+Horas de uso por dia:
+<input type="text" id="input_horas"><br><br>
+
+Custo de energia por hora (R$):
+<input type="text" id="input_custo"><br><br>
+<button onclick="calcular()">Calcular</button><br><br>
+<div id="div_mensagem"></div>
+
+</body>
+</html>
+
+<script>
+
+function calcular(){
+
+    let bateria = Number(input_bateria.value);
+    let consumo = Number(input_consumo.value);
+    let horas = Number(input_horas.value);
+    let custoHora = Number(input_custo.value);
+
+    let duracao = bateria / consumo;
+
+    let consumo_diario = consumo * horas;
+
+    let consumo_mensal = consumo_diario * 30;
+
+    let custo_diario = horas * custoHora;
+
+    let custo_mensal = custo_diario * 30;
+
+    div_mensagem.innerHTML =
+    `Duração estimada da bateria: ${duracao} horas <br>
+     Consumo diário: ${consumo_diario} mAh <br>
+     Consumo mensal: ${consumo_mensal} mAh <br>
+     Custo diário de energia: R$ ${custo_diario} <br>
+     Custo mensal de energia: R$ ${custo_mensal}`;
+
+}
+
+</script>
