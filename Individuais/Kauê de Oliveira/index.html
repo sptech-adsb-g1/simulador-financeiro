@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Simulador de Economia - Life Saver</h2>
+    
+    <p>Quantidade de leitos na UTI: 
+        <input type="number" id="input_leitos">
+    </p>
+    <p>Custo médio da hora do enfermeiro (R$): 
+        <input type="number" id="input_custo_hora">
+    </p>
+    
+    <button onclick="calcularEconomia()">Calcular Impacto</button>
+
+    <div id="div_resultado"></div>
+</body>
+</html>
+
+<script>
+
+let custoEnfermagem = 0;
+let totalLeitos = 0;
+
+function calcularEconomia() {
+
+    let tempoMedicaoMinutos = 5; 
+    let medicoesPorDia = 24;
+    
+    totalLeitos = Number(input_leitos.value);
+    custoEnfermagem = Number(input_custo_hora.value);
+
+    let tempoTotalGastoDia = (totalLeitos * tempoMedicaoMinutos * medicoesPorDia) / 60;
+    let custoTotalDia = tempoTotalGastoDia * custoEnfermagem;
+
+    let mensagemImpacto = "";
+    
+    if (custoTotalDia > 500) {
+        mensagemImpacto = "<strong>Alerta:</strong> O custo operacional manual está muito elevado!";
+    } else {
+        mensagemImpacto = "Otimização recomendada para manutenção de custos.";
+    }
+
+    div_resultado.innerHTML = `
+        <h3>Análise de Viabilidade:</h3>
+        <p>Sua equipe gasta <b>${tempoTotalGastoDia} horas</b> por dia apenas medindo temperaturas.</p>
+        <p>Isso custa ao hospital <b>R$ ${custoTotalDia}</b> diariamente.</p>
+        <p>Com a pulseira inteligente, esse custo é reduzido a zero, liberando a equipe para cuidados críticos.</p>
+        <p>${mensagemImpacto}</p>
+    `;
+}
+</script>
