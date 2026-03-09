@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Simulador Financeiro Individual</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Life Saver</h1>
+
+      <div>
+        <p>Quantidade de leitos de UTI:</p>
+        <input type="text" id="input_leitos" />
+      </div>
+
+      <div>
+        <p>Valor da pulseira:</p>
+        <input type="text" id="input_custo_pulseira" />
+      </div>
+
+      <div>
+        <p>Valor mensal do sistema:</p>
+        <input type="text" id="input_custo_sistema" />
+      </div>
+
+      <br />
+
+      <button onclick="Calcular()">Calcular</button>
+
+      <div id="div_mensagem" class="div_mensagem"></div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function Calcular() {
+    let leitos = Number(input_leitos.value);
+    let custoPulseira = Number(input_custo_pulseira.value);
+    let custoSistema = Number(input_custo_sistema.value);
+
+    let febre = (leitos * 70) / 100;
+    let hipotermia = (leitos * 57.8) / 100;
+
+    let febreReduzida = leitos * 50 / 100;
+    let hipotermiaReduzida = leitos * 37.8 / 100;
+
+    div_mensagem.innerHTML = `
+          Em uma UTI com ${leitos} leitos, cada um com uma pulseira custando R$${custoPulseira} e um custo fixo operacional de R$${custoSistema}, </br>
+          o custo total de implementação seria de R$ ${custoPulseira * leitos + custoSistema}. </br>
+          </br>
+          Sem a solução Life Safer, dentre os ${leitos} leitos, aproximadamente ${febre} teriam febre (70%) e ${hipotermia} teriam hipotermia (57,8%). </br>
+          </br>
+          Com a solução Life Safer, com redução de 20%, dentre os ${leitos} leitos, aproximadamente ${febreReduzida} teriam febre (50%) e ${hipotermiaReduzida} teriam hipotermia (37,8%).
+        `;
+  }
+</script>
