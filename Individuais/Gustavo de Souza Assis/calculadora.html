@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Saver</title>
+</head>
+<body>
+    <h1>Life Saver: Calculadora de custos</h1>
+    <br><br>
+
+    Insira quantos termometros são gastos por dia:
+    <input type="number" id="input_termometro">
+    <br><br>
+
+    Insira quanto dias o paciente ficou na  UTI
+    <input type="number" id="input_dias">
+    <br><br>
+
+    Insira a quantidade de obitos por ataques cardiacos por dia:
+    <input type="number" id="input_obitos">
+    <br><br>
+
+    <Button onclick="enviar()">Calcular</Button>
+    <br><br>
+
+    <div id="div_message"></div>
+</body>
+</html>
+
+<script>
+    let termometros = 2.00;
+    let diaria = 3000.00;
+    let cateterismo = 5000.00;
+    let angioplastia = 20000.00;
+
+    function enviar() {
+        let obitos = Number(input_obitos.value);
+        let dias = Number(input_dias.value);
+        let valorDiaria = dias * diaria;
+        let qtdTermometros = Number(input_termometro.value);
+        let valorTerm = qtdTermometros * termometros;
+        
+        div_message.innerHTML = `O Life Saver é uma alternativa para hospitais poderem monitorar a temperatura de paciente na UTI <br>
+        A solução apresenta um sistema que pode ser monitorado remotamente, e com componentes que podem ser reutilizados após a esterilização <br>
+
+        Você gasta com termometros por dia cerca de <b>R$${valorTerm}</b>;
+
+        Um paciente internado na UTI por algum tipo de ataque cardiovascular pode ter o custo de: <br>
+        Diaria: Se ele ficou internado por <b>${dias} dias</b>, no total, ele teve um custo de <b>R$${valorDiaria}</b>. <br> <br>
+
+        E caso o paciente tenha feito procedimentos como Cateterismo e Angioplastia, esse  valor pode ser ainda maior! <br>
+        Com Cateterismo custando <b>em média R$${cateterismo}</b>. E Angioplastia custando <b>em média R$${angioplastia}</b>; <br><br>
+
+                Com isso as <b>${obitos}</b> pessoas que perderam a sua vida neste dia, poderiam ter um chance maior de sobreviver. <br>
+        E o risco de indenizações seria menor. Com uma indenização podendo custar entre <b>R$100 Mil a R$1 Milhão</b> <br><br>
+
+        Mas antes de qualquer custo, o Life Saver tem o compromisso de aumentar as chances de sobrevivência desses pacientes <br>
+        Entregando um monitoramento contínuo e remoto para os enfermeiros, assim, podendo gerar uma resposta mais rápida por <br>
+        por parte da equipe médica.`;
+        
+
+    }
+
+// feito por Gustavo de Souza Assis
+
+</script>
