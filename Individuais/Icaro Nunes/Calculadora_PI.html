@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Calculadora Financeira - Life Saver</h1>
+
+    Quantidade de leitos de UTI: <input type="text" id="ipt_leitos"> <br><br>
+
+    Custo Unitario da pulseira: <input type="text" id="ipt_custoPulseira"><br><br>
+
+    
+
+    Custo mensal do sistema: <input type="text" id="ipt_custoSistema"> <br><br>
+
+    Custo médio de uma complicação evitavel <br>
+    (Sepse, Hipotermia grave, Eventos cardiovasculares induzidos por febre, Acidente Vascular Cerebral (AVC)): 
+    <input type="text" id="ipt_custoCompli"> <br><br>
+
+    Quantidade média de complicações por mês(Estimativa): <input type="text" id="ipt_qtdCompliMes"><br><br>
+
+    <button onclick="calcular()">Calcular</button> <br><br> 
+
+    <div id="div_exibir"></div>
+</body>
+</html>
+
+<script>
+
+    function calcular(){
+        let qtdLeitos = Number(ipt_leitos.value);
+        let custoPulseiras = Number(ipt_custoPulseira.value);
+        //let qtdPulseiras = Number(ipt_qtdPulseiras.value);
+        let custoSistema = Number(ipt_custoSistema.value);
+        let custoCompli = Number(ipt_custoCompli.value);
+        let qtdCompliMes = Number(ipt_qtdCompliMes.value);
+
+        let investimento = qtdLeitos * custoPulseiras;
+        let ecoMensal = custoCompli * qtdCompliMes;
+        let lucroMensal = ecoMensal - custoSistema;
+        let tempoRetorno = investimento / lucroMensal;
+        let tempoDias = tempoRetorno * 30;
+        console.log(tempoDias);
+        
+        if(lucroMensal <= 0){
+            div_exibir.innerHTML = `Sistema Financeiro Inviavel`    
+        }else{
+            div_exibir.innerHTML = `<h2>Finanças:</h2>
+                                    Investimento Inicial: R$${investimento} <br>
+                                    Economia Mensal: R$${ecoMensal} <br>
+                                    Lucro Mensal: R$${lucroMensal} <br>
+                                    Tempo de Retorno: ${tempoDias} Dias.
+                                    
+                                    <h3> Legendas: </h3>
+                                        <b style="color: blue;">Investimento Inicial: </b> Leitos multiplicado pelo valor da pulseira. <br>
+                                        <b style="color: blue;">Economia Mensal: </b> Quanto o hospital economizou com complicações evitadas. <br>
+                                        <b style="color: blue;">Lucro Mensal: </b> Lucro Líquido do hospital. <br>
+                                        <b style="color: blue;">Tempo de Retorno: </b> Tempo aproximado necessário para recuperar o investimento inicial.`
+            }
+        
+    }
+
+</script>
