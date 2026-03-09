@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculo de Investimento</title>
+</head>
+<body>
+    <h1>Retorno de Investimento</h1>
+    <p>Inserir Lucro Líquido Anual do Hospital</p>
+    
+    <br><input type="text" id="input_lucro"> 
+    <br>
+    <p>Inserir Investimento</p>
+    <input type="text" id="input_investimento">
+    
+    <br> 
+    <br>
+    <button onclick="calcular()">Calculo de Retorno de Investimento</button>
+    <div id="div_mensagem"></div>
+
+
+</body>
+</html>
+<script>
+    function calcular(){
+        let lucro = input_lucro.value
+        let investimento = input_investimento.value
+div_mensagem.innerHTML = `Você teve um retorno de ${(lucro/investimento)*100}%.`
+    }
+</script>
