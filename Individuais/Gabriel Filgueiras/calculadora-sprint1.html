@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h1> Calculadora Financeira</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     Gasto Estimado com os Equipamentos Padrôes (R$):
+    <input type="text" id="ipt_equipamentos">
+    <br>
+    <br>
+
+    Gasto Estimado com a Pulseira (R$):
+    <input type="text" id="ipt_pulseira">
+    <br>
+    <br>
+
+    <button onclick ="calcular()">Calcular</button>
+
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function calcular() {
+    let calculo = Number(ipt_equipamentos.value) - Number(ipt_pulseira.value)
+    div_mensagem.innerHTML = `A economia que a pulseira proporcionará será de R$${calculo}`;
+
+    };
+
+</script>
