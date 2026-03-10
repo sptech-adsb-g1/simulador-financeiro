@@ -6,7 +6,16 @@
     <title>Calculo de Investimento</title>
 </head>
 <body>
+    <h1>Calculo de Lucro</h1>
+     <p>Inserir Número de Leitos</p>
+    <br><input type="text" id="input_leitos"> 
+    <br><p>Inserir Custo Médio de Internação</p>
+    <br><input type="text" id="input_custo"> 
+    <button onclick="lucro()">Calcular Lucro</button>
+    <div id="div_mensagem2"></div>
+
     <h1>Retorno de Investimento</h1>
+    
     <p>Inserir Lucro Líquido Anual do Hospital</p>
     
     <br><input type="text" id="input_lucro"> 
@@ -27,5 +36,10 @@
         let lucro = input_lucro.value
         let investimento = input_investimento.value
 div_mensagem.innerHTML = `Você teve um retorno de ${(lucro/investimento)*100}%.`
+    }
+     function lucro(){
+        let leitos = input_leitos.value
+        let custo = input_custo.value
+div_mensagem.innerHTML = `Seu lucro é de  ${leitos*custo}.`
     }
 </script>
