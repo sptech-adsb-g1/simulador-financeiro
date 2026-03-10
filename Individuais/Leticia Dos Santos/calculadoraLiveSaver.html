@@ -6,23 +6,27 @@
     <title>Calculo de Investimento - Live Saver</title>
 </head>
 <body>
-    <h1>Calculadora Financeira - Life Saver</h1>
+    <h1>Calculadora Financeira - <b style="color: brown;">Life Saver - Grupo 1</b></h1>
+    
+    <div class="inputs">
+        <div>
+            <p>Quantidade de pacientes na UTI por mês:</p>
+            <input class="input" type="number" id="ipt_pacientes"><br><br>
+        </div>
+        <div>
+            <p>Custo médio por paciente (R$):</p>
+            <input class="input" type="number" id="ipt_custo"><br><br>
+        </div>
+        <div>
+            <p>Investimento no sistema(R$):</p>
+            <input class="input" type="number" id="ipt_investimento"><br><br>
+        </div>
+    </div>
+    <div class="button">
+        <button class="button-calcular" onclick="calcular()">Calcular Economia</button><br><br>
+    </div>
 
-    <p>Quantidade de pacientes na UTI por mês:</p>
-    <input type="number" id="ipt_pacientes"><br><br>
-
-    <p>Custo médio por paciente (R$):</p>
-    <input type="number" id="ipt_custo"><br><br>
-
-    <p>Redução estimada de custos com o Life Saver (%):</p>
-    <input type="number" id="ipt_reducao"><br><br>
-
-    <p>Investimento no sistema Life Saver (R$):</p>
-    <input type="number" id="ipt_investimento"><br><br>
-
-    <button onclick="calcular()">Calcular Economia</button><br><br>
-
-    <div id="div_mensagem"></div>
+    <div id="div_mensagem" class="mensagem"></div>
 </body>
 </html>
 <script>
@@ -30,9 +34,8 @@
 
         let pacientes = Number(ipt_pacientes.value)
         let custo = Number(ipt_custo.value)
-        let reducaoPercent = Number(ipt_reducao.value)
 
-        let reducao = reducaoPercent / 100
+        let reducao = 30 / 100;
 
         let investimento = Number(ipt_investimento.value)
 
@@ -45,15 +48,50 @@
         let roi = (economiaAnual / investimento) * 100
 
         div_mensagem.innerHTML = `
-            <h3>Resultado Financeiro</h3>
+            <div>
+                <h3>Resultado Financeiro</h3>
 
-            Custo mensal atual da UTI: <b>R$ ${custoMensal.toFixed(2)}</b><br><br>
+                Custo mensal atual da UTI: <b>R$ ${custoMensal}</b><br>
 
-            Economia mensal estimada: <b>R$ ${economiaMensal.toFixed(2)}</b><br>
+                Economia mensal estimada: <b>R$ ${economiaMensal}</b><br>
 
-            Economia anual estimada: <b>R$ ${economiaAnual.toFixed(2)}</b><br>
+                Economia anual estimada: <b>R$ ${economiaAnual}</b><br>
 
-            Retorno sobre investimento (ROI): <b>${roi.toFixed(2)}%</b>
+                Retorno sobre investimento (ROI): <b>${roi}%</b>
+            </div>
             `
     }
 </script>
+<style>
+    body {
+        margin: 0;
+        font-family: sans-serif;
+    }
+    .inputs{
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        font-size: 16px;
+    }
+    .input{
+        width: 320px;
+    }
+    .button{
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    .button-calcular{
+        width: 200px;
+        height: 40px;
+        border: 0;
+        border-radius: 10px;
+        background-color: brown;
+        color: #fff;
+    }
+    .mensagem{
+        display: flex;
+        justify-content: center;
+        margin: 20px;
+    }
+</style>
