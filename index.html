@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador Financeiro</title>
+    <link rel="stylesheet" href="assets/css/index.css" />
+  </head>
+
+  <body id="body">
+    <div class="main-container" id="mainContainer">
+      <div class="form-section">
+        <h1>Life Saver</h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">
+            Bem-vindo(a) a calculadora financeira Life Saver!
+          </p>
+          <p class="form-description">
+            Digite o nome do hospital abaixo para começar:
+          </p>
+        </div>
+
+        <input type="text" id="inputNomeHospital" class="form-input" />
+
+        <div class="button-group">
+          <button class="btn" onclick="exibirCortesCustos()">
+            Corte de despesas
+          </button>
+          <button class="btn" onclick="exibirCalculoCustos()">
+            Cálculo de custos
+          </button>
+        </div>
+
+        <div id="divAlert"></div>
+      </div>
+
+      <div class="image-section">
+        <img
+          src="assets/img/medical-team.png"
+          alt=""
+          height="128px"
+          width="128px"
+        />
+        <h2>Life Saver</h2>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  let listaCorteCustos = `
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0;
+
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        text-align: center;
+
+        background-image: url(https://img.freepik.com/vetores-premium/fundo-de-ilustracao-vetorial-de-clinica-de-padrao-medico-sem-costura-papel-de-parede-de-saude-apresentacao-de-negocios-de-textura-repetida-bonita_153454-7404.jpg);
+      }
+
+      .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 60%;
+        height: 80%;
+      }
+
+      .form-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 50%;
+        height: 100%;
+
+        padding-top: 20px;
+
+        background-color: #d00000;
+        border-radius: 5px;
+      }
+
+      .btn-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 200px;
+
+        padding: 10px 20px;
+        margin: 5px;
+        margin-top: 20px;
+
+        font-size: 20px;
+        color: #bf0603;
+
+        background-color: white;
+        border-radius: 10px;
+        border: none;
+      }
+    </style>
+    <div class="main-container">
+      <div class="form-section">
+        <h1>Corte de despesas</h1>
+        <div class="btn-group">
+          <button class="btn" onclick="carregarCalculadora1()">
+            Economia com redução de complicações
+          </button>
+          <button class="btn" onclick="calcular()">
+            Economia com redução de termômetros
+          </button>
+          <button class="btn" onclick="calcular()">
+            Economia com equipamentos
+          </button>
+          <button class="btn" onclick="calcular()">
+            Economia com enfermeiros
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  let listaCalculoCusto = `
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0;
+
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        text-align: center;
+
+        background-image: url(https://img.freepik.com/vetores-premium/fundo-de-ilustracao-vetorial-de-clinica-de-padrao-medico-sem-costura-papel-de-parede-de-saude-apresentacao-de-negocios-de-textura-repetida-bonita_153454-7404.jpg);
+      }
+
+      .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 60%;
+        height: 80%;
+      }
+
+      .form-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 50%;
+        height: 100%;
+
+        padding-top: 20px;
+
+        background-color: #d00000;
+        border-radius: 5px;
+      }
+
+      .btn-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 200px;
+
+        padding: 10px 20px;
+        margin: 5px;
+        margin-top: 20px;
+
+        font-size: 20px;
+        color: #bf0603;
+
+        background-color: white;
+        border-radius: 10px;
+        border: none;
+      }
+    </style>
+    <div class="main-container">
+      <div class="form-section">
+        <h1>Cálculo de custos</h1>
+        <div class="btn-group">
+          <button class="btn" onclick="carregarCalculadora1()">
+            Custos com a pulseira
+          </button>
+          <button class="btn" onclick="calcular()">
+            Economia com redução de termômetros
+          </button>
+          <button class="btn" onclick="calcular()">
+            Economia com equipamentos
+          </button>
+          <button class="btn" onclick="calcular()">
+            Economia com enfermeiros
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  let calculadora1 = `
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0;
+
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        text-align: center;
+
+        background-image: url(https://img.freepik.com/vetores-premium/fundo-de-ilustracao-vetorial-de-clinica-de-padrao-medico-sem-costura-papel-de-parede-de-saude-apresentacao-de-negocios-de-textura-repetida-bonita_153454-7404.jpg);
+      }
+
+      .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 30%;
+        height: 60%;
+      }
+
+      .form-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        height: 100%;
+
+        padding: 60px 0px 120px 0px;
+
+        background-color: #d00000;
+        border-radius: 5px;
+      }
+
+      .paragraph-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin-bottom: 20px;
+      }
+
+      .form-description {
+        margin: 5px;
+      }
+
+      .form-input {
+        padding: 10px 20px;
+
+        margin-top: 5px;
+
+        border-radius: 20px;
+        border: none;
+      }
+
+      .button-group {
+        display: flex;
+        flex-direction: column;
+
+        margin-top: 35px;
+        margin-bottom: 30px;
+      }
+
+      .btn {
+        width: 200px;
+
+        padding: 10px 20px;
+        margin: 5px;
+
+        background-color: white;
+        color: #bf0603;
+
+        border-radius: 20px;
+        border: none;
+      }
+
+      .form-section h1 {
+        margin: 0;
+        margin-bottom: 15px;
+
+        margin-top: 20px;
+      }
+
+      .div-mensagem {
+        margin-top: 20px;
+      }
+    </style>
+    <div class="main-container">
+      <div class="form-section">
+        <h1>
+          Economia com Redução <br />
+          de Complicações
+        </h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">Número de leitos na UTI:</p>
+          <input type="number" id="inputLeitosUTI" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">
+            Taxa média de complicações por <br />
+            falha de monitoramento (%):
+          </p>
+          <input type="number" id="inputTaxaComplicacoes" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Custo médio por complicação (R$):</p>
+          <input type="number" id="inputCustoComplicacoes" class="form-input" />
+        </div>
+
+        <button class="btn" onclick="calcularEconomiaReducaoComplicacoes()">Calcular</button>
+
+        <div class="div-mensagem" id="divMensagem"></div>
+      </div>
+    </div>
+  `;
+
+  function exibirCortesCustos() {
+    let nomeHospital = inputNomeHospital.value;
+
+    if (nomeHospital === "") {
+      divAlert.innerHTML = `<span style = "background-color: yellow; color: red;">O nome do hospital deve ser preenchido!</span>`;
+    } else {
+      body.innerHTML = listaCorteCustos;
+    }
+  }
+
+  function carregarCalculadora1() {
+    body.innerHTML = calculadora1;
+  }
+
+  function calcularEconomiaReducaoComplicacoes() {
+    let quantidadeLeitos = Number(inputLeitosUTI.value);
+    let taxaComplicacoes = Number(inputTaxaComplicacoes.value) / 100;
+    let custoComplicacoes = Number(inputCustoComplicacoes.value);
+
+    let percentualReducao = 20 / 100;
+
+    let casosEvitados = quantidadeLeitos * taxaComplicacoes * percentualReducao;
+
+    let economiaAnual = casosEvitados * custoComplicacoes;
+
+    divMensagem.innerHTML = `
+            Estimativa de casos evitados: ${casosEvitados} <br>
+            Estimativa de economia anual: R$ ${economiaAnual}
+        `;
+  }
+
+  function exibirCalculoCustos() {
+    let nomeHospital = inputNomeHospital.value;
+
+    if (nomeHospital === "") {
+      divAlert.innerHTML = `<span style = "background-color: yellow; color: red;">O nome do hospital deve ser preenchido!</span>`;
+    } else {
+      body.innerHTML = listaCalculoCusto;
+    }
+  }
+</script>
