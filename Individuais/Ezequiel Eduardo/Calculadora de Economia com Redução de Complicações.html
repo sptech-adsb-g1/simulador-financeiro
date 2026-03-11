@@ -1,74 +1,154 @@
 <!doctype html>
+
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculadora de Economia com Redução de Complicações</title>
   </head>
-  <style>
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      height: 100vh;
-    }
-  </style>
   <body>
-    <div>
-      <h1>Calculadora de Economia com Redução de Complicações</h1>
-      <div>
-        <label for="inputQuantidadeLeitosUTI">Número de leitos na UTI:</label>
-        <br />
-        <br />
-        <input type="number" id="inputQuantidadeLeitosUTI" />
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0;
+
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        text-align: center;
+
+        background-image: url(https://img.freepik.com/vetores-premium/fundo-de-ilustracao-vetorial-de-clinica-de-padrao-medico-sem-costura-papel-de-parede-de-saude-apresentacao-de-negocios-de-textura-repetida-bonita_153454-7404.jpg);
+      }
+
+      .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 30%;
+        height: 60%;
+      }
+
+      .form-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        height: 100%;
+
+        padding: 60px 0px 120px 0px;
+
+        background-color: #d00000;
+        border-radius: 5px;
+      }
+
+      .paragraph-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin-bottom: 20px;
+      }
+
+      .form-description {
+        margin: 5px;
+      }
+
+      .form-input {
+        padding: 10px 20px;
+
+        margin-top: 5px;
+
+        border-radius: 20px;
+        border: none;
+      }
+
+      .button-group {
+        display: flex;
+        flex-direction: column;
+
+        margin-top: 35px;
+        margin-bottom: 30px;
+      }
+
+      .btn {
+        width: 200px;
+
+        padding: 10px 20px;
+        margin: 5px;
+
+        background-color: white;
+        color: #bf0603;
+
+        border-radius: 20px;
+        border: none;
+      }
+
+      .form-section h1 {
+        margin: 0;
+        margin-bottom: 15px;
+      }
+
+      .div-mensagem {
+        margin: 20px;
+      }
+    </style>
+    <div class="main-container">
+      <div class="form-section">
+        <h1>
+          Economia com Redução <br />
+          de Complicações
+        </h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">Número de leitos na UTI:</p>
+          <input type="number" id="inputLeitosUTI" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">
+            Taxa média de complicações por <br />
+            falha de monitoramento (%):
+          </p>
+          <input type="number" id="inputTaxaComplicacoes" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Custo médio por complicação (R$):</p>
+          <input type="number" id="inputCustoComplicacoes" class="form-input" />
+        </div>
+
+        <button class="btn" onclick="calcularEconomiaReducaoComplicacoes()">Calcular</button>
+
+        <div class="div-mensagem" id="divMensagem"></div>
       </div>
-      <br />
-      <div>
-        <label for="inputTaxaComplicacoes"
-          >Taxa média de complicações por <br />
-          falha de monitoramento (%):</label
-        >
-        <br />
-        <br />
-        <input type="number" id="inputTaxaComplicacoes" />
-      </div>
-      <br />
-      <div>
-        <label for="inputCustoComplicacoes"
-          >Custo médio por <br />complicação (R$):</label
-        >
-        <br />
-        <br />
-        <input type="number" id="inputCustoComplicacoes" />
-      </div>
-      <br />
-      <div>
-        <button onclick="Calcular()">Calcular</button>
-      </div>
-      <br />
-      <div id="divMensagem"></div>
     </div>
+    <script>
+      function calcularEconomiaReducaoComplicacoes() {
+        let quantidadeLeitos = Number(inputLeitosUTI.value);
+        let taxaComplicacoes = Number(inputTaxaComplicacoes.value) / 100;
+        let custoComplicacoes = Number(inputCustoComplicacoes.value);
+
+        let percentualReducao = 20 / 100;
+
+        let casosEvitados =
+          quantidadeLeitos * taxaComplicacoes * percentualReducao;
+
+        let economiaAnual = casosEvitados * custoComplicacoes;
+
+        divMensagem.innerHTML = `
+            Estimativa de casos evitados: ${casosEvitados} <br>
+            Estimativa de economia anual: R$ ${economiaAnual}
+        `;
+      }
+    </script>
   </body>
 </html>
-<script>
-  function Calcular() {
-    let QuantidadeLeitosUTI = Number(inputQuantidadeLeitosUTI.value);
-    let TaxaComplicacoes = Number(inputTaxaComplicacoes.value) / 100;
-    let CustoComplicacoes = Number(inputCustoComplicacoes.value);
-
-    let percentualReducao = 20 / 100;
-
-    let casosEvitados = 0;
-    let economiaAnual = 0;
-
-    casosEvitados = QuantidadeLeitosUTI * TaxaComplicacoes * percentualReducao;
-    economiaAnual = casosEvitados * CustoComplicacoes;
-
-    divMensagem.innerHTML = `
-            Estimativa de casos evitados: ${casosEvitados} 
-            <br/>
-            Estimativa de economia anual: R$${economiaAnual}
-        `;
-  }
-</script>
