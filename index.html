@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simulador Financeiro</title>
     <link rel="stylesheet" href="assets/css/index.css" />
+    <link rel="stylesheet" href="assets/css/calculadoras.css" />
   </head>
 
   <body id="body">
@@ -105,5 +106,469 @@
 
   function carregarCalculadora2() {
     body.innerHTML = ``;
+  }
+
+  // Beatriz Iwata
+  let conteudoBI = `<div class="main-container">
+      <div class="form-section">
+        <h1>
+          Economia com Redução <br />
+          de Complicações
+        </h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">Inserir Lucro Líquido Anual do Hospital</p>
+          <input type="number" id="input_lucro" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Inserir Investimento</p>
+          <input type="number" id="input_investimento" class="form-input" />
+        </div>
+
+        <button class="btn" onclick="calculoGF()">Calcular</button>
+
+        <div class="div-mensagem" id="div_mensagem"></div>
+      </div>
+    </div>`;
+
+  function calculoBI() {
+    let lucro = input_lucro.value;
+    let investimento = input_investimento.value;
+    div_mensagem.innerHTML = `Você teve um retorno de ${(lucro / investimento) * 100}%.`;
+  }
+
+  // Ezequiel Eduardo
+  let conteudoEE = `<div class="main-container">
+      <div class="form-section">
+        <h1>
+          Economia com Redução <br />
+          de Complicações
+        </h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">Número de leitos na UTI:</p>
+          <input type="number" id="inputLeitosUTI" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">
+            Taxa média de complicações por <br />
+            falha de monitoramento (%):
+          </p>
+          <input type="number" id="inputTaxaComplicacoes" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Custo médio por complicação (R$):</p>
+          <input type="number" id="inputCustoComplicacoes" class="form-input" />
+        </div>
+
+        <button class="btn" onclick="calculoGF()">Calcular</button>
+
+        <div class="div-mensagem" id="div_mensagem"></div>
+      </div>
+    </div>`;
+
+  function calculoEE() {
+    let quantidadeLeitos = Number(inputLeitosUTI.value);
+    let taxaComplicacoes = Number(inputTaxaComplicacoes.value) / 100;
+    let custoComplicacoes = Number(inputCustoComplicacoes.value);
+
+    let percentualReducao = 20 / 100;
+
+    let casosEvitados = quantidadeLeitos * taxaComplicacoes * percentualReducao;
+
+    let economiaAnual = casosEvitados * custoComplicacoes;
+
+    div_mensagem.innerHTML = `
+            Estimativa de casos evitados: ${casosEvitados} <br>
+            Estimativa de economia anual: R$ ${economiaAnual}
+        `;
+  }
+
+  // Gabriel Filgueiras
+  let conteudoGF = `<div class="main-container">
+      <div class="form-section">
+        <h1>
+          Economia com Redução <br />
+          de Complicações
+        </h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">Gasto Estimado com os Equipamentos Padrôes (R$):</p>
+          <input type="number" id="ipt_equipamentos" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Gasto Estimado com a Pulseira (R$):</p>
+          <input type="number" id="ipt_pulseira" class="form-input" />
+        </div>
+
+        <button class="btn" onclick="calculoGF()">Calcular</button>
+
+        <div class="div-mensagem" id="div_mensagem"></div>
+      </div>
+    </div>`;
+
+  function calculoGF() {
+    let calculo = Number(ipt_equipamentos.value) - Number(ipt_pulseira.value);
+    div_mensagem.innerHTML = `A economia que a pulseira proporcionará será de R$${calculo}`;
+  }
+
+  // Guilherme Camargo
+  let conteudoGC = `<div class="main-container">
+      <div class="form-section">
+        <h1>
+          Economia com Redução <br />
+          de Complicações
+        </h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">Capacidade da bateria (mAh):</p>
+          <input type="number" id="input_bateria" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Consumo da pulseira (mA):</p>
+          <input type="number" id="input_consumo" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Horas de uso por dia:</p>
+          <input type="number" id="input_horas" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Custo de energia por hora (R$):</p>
+          <input type="number" id="input_custo" class="form-input" />
+        </div>
+
+        <button class="btn" onclick="calculoGC()">Calcular</button>
+
+        <div class="div-mensagem" id="div_mensagem"></div>
+      </div>
+    </div>`;
+
+  function calculoGC() {
+    let bateria = Number(input_bateria.value);
+    let consumo = Number(input_consumo.value);
+    let horas = Number(input_horas.value);
+    let custoHora = Number(input_custo.value);
+
+    let duracao = bateria / consumo;
+
+    let consumo_diario = consumo * horas;
+
+    let consumo_mensal = consumo_diario * 30;
+
+    let custo_diario = horas * custoHora;
+
+    let custo_mensal = custo_diario * 30;
+
+    div_mensagem.innerHTML = `Duração estimada da bateria: ${duracao} horas <br>
+     Consumo diário: ${consumo_diario} mAh <br>
+     Consumo mensal: ${consumo_mensal} mAh <br>
+     Custo diário de energia: R$ ${custo_diario} <br>
+     Custo mensal de energia: R$ ${custo_mensal}`;
+  }
+
+  // Gustavo Brun
+  let conteudoGB = `<div class="main-container">
+      <div class="form-section">
+        <h1>
+          Economia com Redução <br />
+          de Complicações
+        </h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">Quantidade de leitos de UTI:</p>
+          <input type="number" id="input_leitos" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Valor da pulseira:</p>
+          <input type="number" id="input_custo_pulseira" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Valor mensal do sistema:</p>
+          <input type="number" id="input_custo_sistema" class="form-input" />
+        </div>
+
+        <button class="btn" onclick="calculoGB()">Calcular</button>
+
+        <div class="div-mensagem" id="div_mensagem"></div>
+      </div>
+    </div>`;
+
+  function calculoGB() {
+    let leitos = Number(input_leitos.value);
+    let custoPulseira = Number(input_custo_pulseira.value);
+    let custoSistema = Number(input_custo_sistema.value);
+
+    let febre = (leitos * 70) / 100;
+    let hipotermia = (leitos * 57.8) / 100;
+
+    let febreReduzida = (leitos * 50) / 100;
+    let hipotermiaReduzida = (leitos * 37.8) / 100;
+
+    div_mensagem.innerHTML = `
+          Em uma UTI com ${leitos} leitos, cada um com uma pulseira custando R$${custoPulseira} e um custo fixo operacional de R$${custoSistema}, </br>
+          o custo total de implementação seria de R$ ${custoPulseira * leitos + custoSistema}. </br>
+          </br>
+          Sem a solução Life Safer, dentre os ${leitos} leitos, aproximadamente ${febre} teriam febre (70%) e ${hipotermia} teriam hipotermia (57,8%). </br>
+          </br>
+          Com a solução Life Safer, com redução de 20%, dentre os ${leitos} leitos, aproximadamente ${febreReduzida} teriam febre (50%) e ${hipotermiaReduzida} teriam hipotermia (37,8%).
+        `;
+  }
+
+  // Gustavo de Souza
+  let conteudoGS = `<div class="main-container">
+      <div class="form-section">
+        <h1>
+          Economia com Redução <br />
+          de Complicações
+        </h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">Insira quantos termometros são gastos por dia:</p>
+          <input type="number" id="input_termometro" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Insira quanto dias o paciente ficou na  UTI</p>
+          <input type="number" id="input_dias" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Insira a quantidade de obitos por ataques cardiacos por dia:</p>
+          <input type="number" id="input_obitos" class="form-input" />
+        </div>
+
+        <button class="btn" onclick="calculoGS()">Calcular</button>
+
+        <div class="div-mensagem" id="div_mensagem"></div>
+      </div>
+    </div>`;
+
+  function calculoGS() {
+    let termometros = 2.0;
+    let diaria = 3000.0;
+    let cateterismo = 5000.0;
+    let angioplastia = 20000.0;
+
+    let obitos = Number(input_obitos.value);
+    let dias = Number(input_dias.value);
+    let valorDiaria = dias * diaria;
+    let qtdTermometros = Number(input_termometro.value);
+    let valorTerm = qtdTermometros * termometros;
+
+    div_mensagem.innerHTML = `O Life Saver é uma alternativa para hospitais poderem monitorar a temperatura de paciente na UTI <br>
+        A solução apresenta um sistema que pode ser monitorado remotamente, e com componentes que podem ser reutilizados após a esterilização <br>
+
+        Você gasta com termometros por dia cerca de <b>R$${valorTerm}</b>;
+
+        Um paciente internado na UTI por algum tipo de ataque cardiovascular pode ter o custo de: <br>
+        Diaria: Se ele ficou internado por <b>${dias} dias</b>, no total, ele teve um custo de <b>R$${valorDiaria}</b>. <br> <br>
+
+        E caso o paciente tenha feito procedimentos como Cateterismo e Angioplastia, esse  valor pode ser ainda maior! <br>
+        Com Cateterismo custando <b>em média R$${cateterismo}</b>. E Angioplastia custando <b>em média R$${angioplastia}</b>; <br><br>
+
+                Com isso as <b>${obitos}</b> pessoas que perderam a sua vida neste dia, poderiam ter um chance maior de sobreviver. <br>
+        E o risco de indenizações seria menor. Com uma indenização podendo custar entre <b>R$100 Mil a R$1 Milhão</b> <br><br>
+
+        Mas antes de qualquer custo, o Life Saver tem o compromisso de aumentar as chances de sobrevivência desses pacientes <br>
+        Entregando um monitoramento contínuo e remoto para os enfermeiros, assim, podendo gerar uma resposta mais rápida por <br>
+        por parte da equipe médica.`;
+  }
+
+  // Icaro Nunes
+  let conteudoIN = `<div class="main-container">
+      <div class="form-section">
+        <h1>
+          Economia com Redução <br />
+          de Complicações
+        </h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">Quantidade de leitos de UTI:</p>
+          <input type="number" id="ipt_leitos" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Custo Unitario da pulseira:</p>
+          <input type="number" id="ipt_custoPulseira" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Custo mensal do sistema:</p>
+          <input type="number" id="ipt_custoSistema" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description"> 
+            Custo médio de uma complicação evitavel <br>
+            (Sepse, Hipotermia grave, Eventos cardiovasculares induzidos por febre, Acidente Vascular Cerebral (AVC)):
+          </p>
+          <input type="number" id="ipt_custoCompli" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Quantidade média de complicações por mês(Estimativa):</p>
+          <input type="number" id="ipt_qtdCompliMes" class="form-input" />
+        </div>
+
+        <button class="btn" onclick="calculoIN()">Calcular</button>
+
+        <div class="div-mensagem" id="div_mensagem"></div>
+      </div>
+    </div>`;
+
+  function calculoIN() {
+    let termometros = 2.0;
+    let diaria = 3000.0;
+    let cateterismo = 5000.0;
+    let angioplastia = 20000.0;
+
+    let obitos = Number(input_obitos.value);
+    let dias = Number(input_dias.value);
+    let valorDiaria = dias * diaria;
+    let qtdTermometros = Number(input_termometro.value);
+    let valorTerm = qtdTermometros * termometros;
+
+    div_mensagem.innerHTML = `O Life Saver é uma alternativa para hospitais poderem monitorar a temperatura de paciente na UTI <br>
+        A solução apresenta um sistema que pode ser monitorado remotamente, e com componentes que podem ser reutilizados após a esterilização <br>
+
+        Você gasta com termometros por dia cerca de <b>R$${valorTerm}</b>;
+
+        Um paciente internado na UTI por algum tipo de ataque cardiovascular pode ter o custo de: <br>
+        Diaria: Se ele ficou internado por <b>${dias} dias</b>, no total, ele teve um custo de <b>R$${valorDiaria}</b>. <br> <br>
+
+        E caso o paciente tenha feito procedimentos como Cateterismo e Angioplastia, esse  valor pode ser ainda maior! <br>
+        Com Cateterismo custando <b>em média R$${cateterismo}</b>. E Angioplastia custando <b>em média R$${angioplastia}</b>; <br><br>
+
+                Com isso as <b>${obitos}</b> pessoas que perderam a sua vida neste dia, poderiam ter um chance maior de sobreviver. <br>
+        E o risco de indenizações seria menor. Com uma indenização podendo custar entre <b>R$100 Mil a R$1 Milhão</b> <br><br>
+
+        Mas antes de qualquer custo, o Life Saver tem o compromisso de aumentar as chances de sobrevivência desses pacientes <br>
+        Entregando um monitoramento contínuo e remoto para os enfermeiros, assim, podendo gerar uma resposta mais rápida por <br>
+        por parte da equipe médica.`;
+  }
+
+  // Kauê de Oliveira
+  let conteudoKO = `<div class="main-container">
+      <div class="form-section">
+        <h1>
+          Economia com Redução <br />
+          de Complicações
+        </h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">Quantidade de leitos na UTI</p>
+          <input type="number" id="input_leitos" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Custo médio da hora do enfermeiro (R$): </p>
+          <input type="number" id="input_custo_hora" class="form-input" />
+        </div>
+
+        <button class="btn" onclick="calculoKO()">Calcular</button>
+
+        <div class="div-mensagem" id="div_mensagem"></div>
+      </div>
+    </div>`;
+
+  function calculoKO() {
+    let custoEnfermagem = 0;
+    let totalLeitos = 0;
+
+    let tempoMedicaoMinutos = 5;
+    let medicoesPorDia = 24;
+
+    totalLeitos = Number(input_leitos.value);
+    custoEnfermagem = Number(input_custo_hora.value);
+
+    let tempoTotalGastoDia =
+      (totalLeitos * tempoMedicaoMinutos * medicoesPorDia) / 60;
+    let custoTotalDia = tempoTotalGastoDia * custoEnfermagem;
+
+    let mensagemImpacto = "";
+
+    if (custoTotalDia > 500) {
+      mensagemImpacto =
+        "<strong>Alerta:</strong> O custo operacional manual está muito elevado!";
+    } else {
+      mensagemImpacto = "Otimização recomendada para manutenção de custos.";
+    }
+
+    div_resultado.innerHTML = `
+        <h3>Análise de Viabilidade:</h3>
+        <p>Sua equipe gasta <b>${tempoTotalGastoDia} horas</b> por dia apenas medindo temperaturas.</p>
+        <p>Isso custa ao hospital <b>R$ ${custoTotalDia}</b> diariamente.</p>
+        <p>Com a pulseira inteligente, esse custo é reduzido a zero, liberando a equipe para cuidados críticos.</p>
+        <p>${mensagemImpacto}</p>
+    `;
+  }
+
+  // Leticia dos Santos
+  let conteudoLS = `<div class="main-container">
+      <div class="form-section">
+        <h1>
+          Economia com Redução <br />
+          de Complicações
+        </h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">Quantidade de pacientes na UTI por mês:</p>
+          <input type="number" id="ipt_pacientes" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Custo médio por paciente (R$):</p>
+          <input type="number" id="ipt_custo" class="form-input" />
+        </div>
+
+        <div class="paragraph-group">
+          <p class="form-description">Investimento no sistema(R$):</p>
+          <input type="number" id="ipt_investimento" class="form-input" />
+        </div>
+
+        <button class="btn" onclick="calculoLS()">Calcular</button>
+
+        <div class="div-mensagem" id="div_mensagem"></div>
+      </div>
+    </div>`;
+
+  function calculoLS() {
+    let pacientes = Number(ipt_pacientes.value);
+    let custo = Number(ipt_custo.value);
+
+    let reducao = 20 / 100;
+
+    let investimento = Number(ipt_investimento.value);
+
+    let custoMensal = pacientes * custo;
+
+    let economiaMensal = custoMensal * reducao;
+
+    let economiaAnual = economiaMensal * 12;
+
+    let roi = (economiaAnual / investimento) * 100;
+
+    div_mensagem.innerHTML = `
+            <div>
+                <h3>Resultado Financeiro</h3>
+
+                Custo mensal atual da UTI: <b>R$ ${custoMensal}</b><br>
+
+                Economia mensal estimada: <b>R$ ${economiaMensal}</b><br>
+
+                Economia anual estimada: <b>R$ ${economiaAnual}</b><br>
+
+                Retorno sobre investimento (ROI): <b>${roi}%</b>
+            </div>
+            `;
   }
 </script>
