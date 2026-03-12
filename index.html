@@ -127,6 +127,9 @@
           margin-top: 20px;
         }
       </style>
+      <div class="exit">
+        <button onclick="voltar()">Voltar</button>
+      </div>
       <div class="main-container">
         <div class="form-section">
           <h1>Economia com Redução<br />de Complicações</h1>
@@ -233,6 +236,9 @@
           margin: 20px;
         }
       </style>
+      <div class="exit">
+        <button onclick="voltar()">Voltar</button>
+      </div>
       <div class="main-container">
         <div class="form-section">
           <h1>Calculadora de Consumo<br />da Pulseira</h1>
@@ -299,7 +305,49 @@
     div_mensagem.innerHTML = `Duração estimada da bateria: ${duracao} horas <br>
          Consumo diário: ${consumo_diario} mAh <br>
          Consumo mensal: ${consumo_mensal} mAh <br>
-         Custo diário de energia: R$ ${custo_diario} <br>
-         Custo mensal de energia: R$ ${custo_mensal}`;
+         Custo diário de energia: R$ ${custo_diario.toFixed(2)} <br>
+         Custo mensal de energia: R$ ${custo_mensal.toFixed(2)}`;
+  }
+
+  function voltar(){
+    body.innerHTML = `
+      <div class="main-container" id="mainContainer">
+      <div class="form-section">
+        <h1>Life Saver</h1>
+
+        <div class="paragraph-group">
+          <p class="form-description">
+            Bem-vindo(a) a calculadora financeira Life Saver!
+          </p>
+          <p class="form-description">
+            Digite o nome do hospital abaixo para começar:
+          </p>
+        </div>
+
+        <input type="text" id="inputNomeHospital" class="form-input" />
+
+        <div class="button-group">
+          <button class="btn" onclick="exibirCalculadora1()">
+            Corte de despesas
+          </button>
+          <button class="btn" onclick="carregarCalculadora2()">
+            Cálculo de custos
+          </button>
+        </div>
+
+        <div id="divAlert"></div>
+      </div>
+
+      <div class="image-section">
+        <img
+          src="assets/img/medical-team.png"
+          alt=""
+          height="128px"
+          width="128px"
+        />
+        <h2>Life Saver</h2>
+      </div>
+    </div>
+    `;
   }
 </script>

@@ -1,8 +1,9 @@
-#body, html{
+#body,
+html {
   height: 100%;
 }
 
-#body{
+#body {
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -11,7 +12,7 @@
   color: white;
 
   background-image: url(https://img.freepik.com/vetores-premium/fundo-de-ilustracao-vetorial-de-clinica-de-padrao-medico-sem-costura-papel-de-parede-de-saude-apresentacao-de-negocios-de-textura-repetida-bonita_153454-7404.jpg);
-  
+
   /* background-image: url(https://thumbs.dreamstime.com/b/teste-padr%C3%A3o-sem-emenda-da-farm%C3%A1cia-dental-m%C3%A9dica-do-s%C3%ADmbolo-sinal-m%C3%A9dico-equipamento-fundo-repeti%C3%A7%C3%A3o-biotecnologia-145884983.jpg); */
 }
 
@@ -86,4 +87,22 @@
 
   border-radius: 20px;
   border: none;
+}
+
+.exit {
+  display: flex;
+  align-self: flex-start;
+}
+
+.exit button{
+  font-size: 20px;
+
+  padding: 10px;
+  margin: 20px;
+
+  border: none;
+  border-radius: 2px;
+
+  background-color: white;
+  color: #bf0603;
 }
